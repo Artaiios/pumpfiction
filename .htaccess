@@ -1,0 +1,26 @@
+<FilesMatch "^(config|auth|functions|gamification|wall_events|voting_logic|db_credentials)\.php$">
+    <If "%{REQUEST_URI} =~ m#/includes/#">
+        Require all denied
+    </If>
+</FilesMatch>
+<If "-f '%{DOCUMENT_ROOT}/pumpfiction/install/.installed'">
+    <FilesMatch "install\.php$">
+        Require all denied
+    </FilesMatch>
+</If>
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+Options -Indexes
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+<IfModule mod_php.c>
+    php_value upload_max_filesize 2M
+    php_value post_max_size 2M
+    php_value session.cookie_httponly 1
+    php_value session.cookie_samesite "Lax"
+</IfModule>

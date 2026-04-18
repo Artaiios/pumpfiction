@@ -1,0 +1,20 @@
+# Database credentials (contains passwords)
+includes/db_credentials.php
+
+# Installation lock
+install/.installed
+
+# OS junk
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# IDE
+.idea/
+.vscode/
+*.sublime-*
+
+# Cleanup scripts (one-time use)
+cleanup.php
+fix_badges.php
